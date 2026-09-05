@@ -17,7 +17,7 @@ builder() {
      clang -O2 -o ./mac/actual -L ./mac/bass24-osx -L ./mac/bassmidi24-osx\
       -I . -I ./mac -I ./mac/bass24-osx/c -I ./mac/bassmidi24-osx/c\
       -framework CoreFoundation -framework CoreMIDI -lbass -lbassmidi\
-      -arch x86_64 -arch arm main.c daemon_core.c ./mac/coremidi_input.c
+      -arch x86_64 -arch arm64 main.c daemon_core.c ./mac/coremidi_input.c
     ;;
    
     linux)

@@ -1,0 +1,187 @@
+#!/usr/bin/env bash
+# 
+# Simple build script for ActualMIDIsynth
+#
+cmd=$(basename $0)
+
+builder() {
+  if [ -z $@ ]; then
+    OS=$(uname -s|tr '[:upper:]' '[:lower:]') 
+  else
+    OS=$(echo $@|tr '[:upper:]' '[:lower:]') 
+  fi
+
+  case $OS in
+    darwin|mac|macos)
+     echo "Building for MacOS"
+     clang -O2 -o ./mac/actual -L ./mac/bass24-osx -L ./mac/bassmidi24-osx\
+      -I . -I ./mac -I ./mac/bass24-osx/c -I ./mac/bassmidi24-osx/c\
+      -framework CoreFoundation -framework CoreMIDI -lbass -lbassmidi\
+      -arch x86_64 -arch arm main.c daemon_core.c ./mac/coremidi_input.c
+    ;;
+   
+    linux)
+     echo "Building for Linux"
+     cc -O2 -o ./linux/actual\
+      -L ./linux/bass24-linux/libs/x86_64 -L ./linux/bassmidi24-linux/libs/x86_64\
+      -I . -I ./linux -I ./linux/bass24-linux/c -I ./linux/bassmidi24-linux/c\
+     -lasound -lbass -lbassmidi main.c daemon_core.c ./linux/alsa_input.c
+    ;;
+   
+    *)
+     echo "Unsupported platform: $OS"
+     
+     echo -e "\nUsage: build [PLATFORM]"
+     
+     return 0
+    ;;
+   esac  
+}
+
+installer() {
+  echo "Installing"
+  case $1 in
+    actual)
+      true
+    ;;
+    bass)
+      case $(uname -s) in 
+        Linux)
+	  pushd ./linux
+	  grabber https://www.un4seen.com/files/bass24-linux.zip
+	  mkdir -p bass24-linux
+	  cd bass24-linux
+	  unzip ../bass24-linux.zip && rm ../bass24-linux.zip
+	  popd
+	;;
+	Darwin)
+	  pushd ./mac
+	  grabber https://www.un4seen.com/files/bass24-osx.zip
+	  mkdir -p bass24-osx
+	  cd bass24-osx                                                                                                
+	  unzip ../bass24-osx.zip && rm ../bass24-osx.zip
+	  popd
+        ;;
+        *)
+	  true
+	;;
+
+      esac
+    ;;    
+    bassmidi)
+      case $(uname -s) in 
+        Linux)
+	  pushd ./linux
+	  grabber https://www.un4seen.com/files/bassmidi24-linux.zip
+	  mkdir -p bassmidi24-linux
+	  cd bassmidi24-linux
+	  unzip ../bassmidi24-linux.zip && rm ../bassmidi24-linux.zip
+	  popd
+	;;
+	Darwin)
+	  pushd ./mac
+	  grabber https://www.un4seen.com/files/bassmidi24-osx.zip
+	  mkdir -p bassmidi24-osx
+	  cd bassmidi24-osx                                                                                                
+	  unzip ../bassmidi24-osx.zip && rm ../bassmidi24-osx.zip
+	  popd
+	;;
+	*)
+	  true
+	;;
+      esac
+      ;;
+    *)
+      true
+    ;;
+  esac
+  
+}
+
+
+cmdhelp() {
+  echo "
+usage: $cmd [OPTIONS]
+
+$cmd is a tool for buiding or installing ActualMIDIsynth. If no
+commands are specified it will build for the current platform.
+
+OPTIONS:
+
+-build <platform>       Build ActualMIDIsynth for <platform>
+                        supported platforms macos and linux 
+			if no platform specified, will build for 
+			the current platform 
+  
+-clean                  remove binaries left over from prior
+                        builds
+			  
+-help | -h              Show $cmd usage information
+
+-install                Install binaries and libraries if they exist
+"
+}
+
+grabber() {
+  if command -v wget 2>&1>/dev/null; then
+    wget $@
+  elif command -v curl 2>&1>/dev/null; then
+    curl $@ -o $(basename $@) 
+  else
+    echo "no file retrival tool available"
+    return 1
+  fi 
+}
+
+###################################################################
+
+if [ -z "$1" ]; then
+  builder
+fi
+
+while ! [ -z $1 ]; do
+ case $1 in
+   --b*|-b*)
+     if ! [ -z "$2" ]; then
+       if ! echo "$2" | cut -c1 | grep -q "-"; then
+         builder "$2"
+         shift 2
+       else 
+         builder
+	 shift 1
+       fi
+     else
+       builder
+       shift 1
+     fi	
+   ;;
+   
+   --i*|-i*)
+     if ! [ -z "$2" ]; then
+       if ! echo "$2" | cut -c1 | grep -q "-"; then
+         installer $2
+         shift 2
+       else 
+         installer
+	 shift 1
+       fi
+     else
+       installer
+       shift 1
+     fi	     
+   ;;
+   
+   -h*|--h*)
+      cmdhelp
+      exit
+   ;;
+   
+   *)
+      echo "ERROR: Don't understand $1"
+      exit 1
+   ;;
+ esac
+done
+
+echo "Done"
+																																																																																																																																																																																				

@@ -47,20 +47,34 @@ installer() {
     bass)
       case $(uname -s) in 
         Linux)
-	  pushd ./linux
-	  grabber https://www.un4seen.com/files/bass24-linux.zip
-	  mkdir -p bass24-linux
-	  cd bass24-linux
-	  unzip ../bass24-linux.zip && rm ../bass24-linux.zip
-	  popd
+	  if [ -d ./linux/bass24-linux ]; then
+	    echo "BASS library seems to be installed already"
+	    read -rp "Continue? [y/N] " answer
+
+            if [[ "$answer" =~ ^[Yy]$ ]]; then
+              pushd ./linux
+              grabber https://www.un4seen.com/files/bass24-linux.zip
+              mkdir -p bass24-linux
+              cd bass24-linux
+              unzip ../bass24-linux.zip && rm ../bass24-linux.zip
+              popd
+	    fi
+	  fi  
 	;;
 	Darwin)
-	  pushd ./mac
-	  grabber https://www.un4seen.com/files/bass24-osx.zip
-	  mkdir -p bass24-osx
-	  cd bass24-osx                                                                                                
-	  unzip ../bass24-osx.zip && rm ../bass24-osx.zip
-	  popd
+	  if [ -d ./mac/bass24-osx ]; then
+	    echo "BASS library seems to be installed already"
+	    read -rp "Continue? [y/N] " answer
+
+            if [[ "$answer" =~ ^[Yy]$ ]]; then
+	      pushd ./mac
+	      grabber https://www.un4seen.com/files/bass24-osx.zip
+	      mkdir -p bass24-osx
+	      cd bass24-osx                                                                                                
+	      unzip ../bass24-osx.zip && rm ../bass24-osx.zip
+	      popd
+	    fi
+	  fi
         ;;
         *)
 	  true
@@ -71,20 +85,34 @@ installer() {
     bassmidi)
       case $(uname -s) in 
         Linux)
-	  pushd ./linux
-	  grabber https://www.un4seen.com/files/bassmidi24-linux.zip
-	  mkdir -p bassmidi24-linux
-	  cd bassmidi24-linux
-	  unzip ../bassmidi24-linux.zip && rm ../bassmidi24-linux.zip
-	  popd
+	  if [ -d ./linux/bassmidi24-linux ]; then
+	    echo "BASSMIDI library seems to be installed already"
+	    read -rp "Continue? [y/N] " answer
+
+            if [[ "$answer" =~ ^[Yy]$ ]]; then
+              pushd ./linux
+	      grabber https://www.un4seen.com/files/bassmidi24-linux.zip
+	      mkdir -p bassmidi24-linux
+	      cd bassmidi24-linux
+	      unzip ../bassmidi24-linux.zip && rm ../bassmidi24-linux.zip
+	      popd
+	    fi
+	  fi  
 	;;
 	Darwin)
-	  pushd ./mac
-	  grabber https://www.un4seen.com/files/bassmidi24-osx.zip
-	  mkdir -p bassmidi24-osx
-	  cd bassmidi24-osx                                                                                                
-	  unzip ../bassmidi24-osx.zip && rm ../bassmidi24-osx.zip
-	  popd
+	  if [ -d ./mac/bassmidi24-osx ]; then
+	    echo "BASSMIDI library seems to be installed already"
+	    read -rp "Continue? [y/N] " answer
+
+            if [[ "$answer" =~ ^[Yy]$ ]]; then	  
+	      pushd ./mac
+	      grabber https://www.un4seen.com/files/bassmidi24-osx.zip
+	      mkdir -p bassmidi24-osx
+	      cd bassmidi24-osx                                                                                                
+	      unzip ../bassmidi24-osx.zip && rm ../bassmidi24-osx.zip
+	      popd
+	   fi
+	 fi
 	;;
 	*)
 	  true
@@ -184,4 +212,3 @@ while ! [ -z $1 ]; do
 done
 
 echo "Done"
-																																																																																																																																																																																				

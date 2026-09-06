@@ -5,11 +5,11 @@ BASS and BASSMIDI libraries from Un4seen Developments. It was created mainly
 for my own purposes, but it could be useful to others for a variety of 
 reasons, including that, barring bugs and platform quirks, it should...
 
- o sound exactly like VirtualMIDIsynth on Windows
+ o   given the same soundfont, sound exactly like VirtualMIDIsynth on Windows
  
- o support more MIDI extensions than most other synths
+ o   support more MIDI extensions than most other synths
  
- o use significantly less resources than other synths
+ o   use significantly less resources than other synths
 
 DISCLAIMERS
 BASS Licensing

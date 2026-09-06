@@ -58,7 +58,8 @@ installer() {
             grabber https://www.un4seen.com/files/bass24-linux.zip
             mkdir -p bass24-linux
             cd bass24-linux
-            unzip ../bass24-linux.zip && rm ../bass24-linux.zip
+            unzip ../bass24-linux.zip
+	    rm -v ../bass24-linux.zip
             popd
 	    
 	  fi  
@@ -75,7 +76,8 @@ installer() {
 	    grabber https://www.un4seen.com/files/bass24-osx.zip
 	    mkdir -p bass24-osx
 	    cd bass24-osx                                                                                                
-	    unzip ../bass24-osx.zip && rm ../bass24-osx.zip
+	    unzip ../bass24-osx.zip
+	    rm ../bass24-osx.zip
 	    popd
 	  fi
         ;;
@@ -99,7 +101,8 @@ installer() {
 	    grabber https://www.un4seen.com/files/bassmidi24-linux.zip
 	    mkdir -p bassmidi24-linux
 	    cd bassmidi24-linux
-	    unzip ../bassmidi24-linux.zip && rm ../bassmidi24-linux.zip
+	    unzip ../bassmidi24-linux.zip
+	    rm ../bassmidi24-linux.zip
 	    popd
 	  fi  
 	;;
@@ -115,7 +118,8 @@ installer() {
 	    grabber https://www.un4seen.com/files/bassmidi24-osx.zip
 	    mkdir -p bassmidi24-osx
 	    cd bassmidi24-osx                                                                                                
-	    unzip ../bassmidi24-osx.zip && rm ../bassmidi24-osx.zip
+	    unzip ../bassmidi24-osx.zip
+	    rm ../bassmidi24-osx.zip
 	    popd
 	  fi
 	;;

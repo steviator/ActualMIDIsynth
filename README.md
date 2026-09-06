@@ -1,9 +1,10 @@
 ActualMIDIsynth
 
-This is an MIDI soft synthesizer utilizing the closed source and proprietary 
+This is a MIDI soft synthesizer providing CoreMIDI and ALSA MIDI endpoints 
+on MacOS and Linux respectively, utilizing the closed source and proprietary 
 BASS and BASSMIDI libraries from Un4seen Developments. It was created mainly 
 for my own purposes, but it could be useful to others for a variety of 
-reasons, including that, barring bugs and platform quirks, it should...
+reasons, including that (barring bugs and platform quirks) it should...
 
  o   given the same soundfont, sound exactly like VirtualMIDIsynth on Windows
  

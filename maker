@@ -53,16 +53,17 @@ installer() {
             if [[ ! "$answer" =~ ^[Yy]$ ]]; then
 	      return
 	    fi
-	    
-            pushd ./linux
-            grabber https://www.un4seen.com/files/bass24-linux.zip
-            mkdir -p bass24-linux
-            cd bass24-linux
-            unzip ../bass24-linux.zip
-	    rm -v ../bass24-linux.zip
-            popd
-	    
 	  fi  
+          
+	  pushd ./linux
+          grabber https://www.un4seen.com/files/bass24-linux.zip
+          mkdir -p bass24-linux
+          cd bass24-linux
+          unzip ../bass24-linux.zip
+	  rm -v ../bass24-linux.zip
+          popd
+	    
+	    
 	;;
 	Darwin)
 	  if [ -d ./mac/bass24-osx ]; then
@@ -71,15 +72,16 @@ installer() {
             if [[ ! "$answer" =~ ^[Yy]$ ]]; then
 	      return
 	    fi
-
-	    pushd ./mac
-	    grabber https://www.un4seen.com/files/bass24-osx.zip
-	    mkdir -p bass24-osx
-	    cd bass24-osx                                                                                                
-	    unzip ../bass24-osx.zip
-	    rm ../bass24-osx.zip
-	    popd
-	  fi
+	  fi  
+	 
+          pushd ./mac
+          grabber https://www.un4seen.com/files/bass24-osx.zip
+          mkdir -p bass24-osx
+          cd bass24-osx                                                                                                
+          unzip ../bass24-osx.zip
+          rm ../bass24-osx.zip
+          popd
+	  
         ;;
         *)
 	  true
@@ -96,15 +98,16 @@ installer() {
             if [[ ! "$answer" =~ ^[Yy]$ ]]; then
 	      return
 	    fi
-              
-	    pushd ./linux
-	    grabber https://www.un4seen.com/files/bassmidi24-linux.zip
-	    mkdir -p bassmidi24-linux
-	    cd bassmidi24-linux
-	    unzip ../bassmidi24-linux.zip
-	    rm ../bassmidi24-linux.zip
-	    popd
-	  fi  
+          fi
+	      
+	  pushd ./linux
+	  grabber https://www.un4seen.com/files/bassmidi24-linux.zip
+	  mkdir -p bassmidi24-linux
+	  cd bassmidi24-linux
+	  unzip ../bassmidi24-linux.zip
+	  rm ../bassmidi24-linux.zip
+	  popd
+	    
 	;;
 	Darwin)
 	  if [ -d ./mac/bassmidi24-osx ]; then
@@ -113,15 +116,16 @@ installer() {
             if [[ ! "$answer" =~ ^[Yy]$ ]]; then
 	      return
 	    fi
-	    
-	    pushd ./mac
-	    grabber https://www.un4seen.com/files/bassmidi24-osx.zip
-	    mkdir -p bassmidi24-osx
-	    cd bassmidi24-osx                                                                                                
-	    unzip ../bassmidi24-osx.zip
-	    rm ../bassmidi24-osx.zip
-	    popd
 	  fi
+	    
+	  pushd ./mac
+	  grabber https://www.un4seen.com/files/bassmidi24-osx.zip
+	  mkdir -p bassmidi24-osx
+	  cd bassmidi24-osx                                                                                                
+	  unzip ../bassmidi24-osx.zip
+	  rm ../bassmidi24-osx.zip
+	  popd
+	  
 	;;
 	*)
 	  true
